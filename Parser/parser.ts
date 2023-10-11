@@ -69,10 +69,17 @@ class Parser {
 		let posStart = this.currentToken?.posStart?.copy()
 
 		while (this.currentToken?.type === TokenType.TT_STRING) {
-			statements.push(new StringNode("text", this.currentToken.value));
+			statements.push(new StringNode(this.currentToken, this.currentToken.value));
 			res.registerAdvancement()
 			this.advance()
 		}
+
+		if (this.currentToken.type === TokenType.TT_EOF) {
+			return res.success(
+				new ListNode(statements, posStart!, this.currentToken.posEnd!.copy())
+			)
+		}
+
 
 		if (this.currentToken.indent !== indent) {
 			return res.success(statements)
@@ -88,13 +95,13 @@ class Parser {
 
 		while (true) {
 			while (this.currentToken.type as TokenType === TokenType.TT_STRING) {
-				statements.push(new StringNode("text", this.currentToken.value));
+				statements.push(new StringNode(this.currentToken, this.currentToken.value));
 				res.registerAdvancement()
 				this.advance()
 			}
 
 
-			if (this.currentToken.type === TokenType.TT_EOF) {
+			if (this.currentToken.type as TokenType === TokenType.TT_EOF) {
 				break
 			}
 
@@ -119,7 +126,9 @@ class Parser {
 			)
 		}
 
-		return res.success(statements)
+		return res.success(
+			new ListNode(statements, posStart!, this.currentToken.posEnd!.copy())
+		)
 
 	}
 

@@ -4,20 +4,7 @@ import Parser from "./Parser/parser";
 
 const example = `
 esto es un texto y aqui quiero mostrar las facturas
-<ul>
- {% for bill in Facturas %}
-	{% if True %}
-		<li>{{ bill.year }}/{{bill.numero}}</li>
-	{% endif %}
- {% endfor %}
-</ul>
 
-debería de quedar igual que:
-<ul>
-	<li>2020/1</li>
-	<li>2020/2</li>
-	<li>2023/1</li>
-</ul>
 `
 
 
@@ -35,7 +22,6 @@ function Run(text:string, fileName?: string) {
 	}
 
 	const parsedValue = parsed.value
-
 
 	const context = {
 		None: null,
