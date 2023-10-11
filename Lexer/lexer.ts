@@ -123,7 +123,11 @@ class Lexer {
 		return new Token(tokenType, idString, posStart, this.pos, indentation)
 	}
 
-	makeTokens(): {tokens: Token[], error: JinjaError | null} {
+	makeTokens(text?: string): {tokens: Token[], error: JinjaError | null} {
+		if (text) {
+			this.text = text
+		}
+		
 		let tokens: Token[] = []
 		let inBlock = false
 		let asCode = false
