@@ -126,8 +126,10 @@ class Lexer {
 	makeTokens(text?: string): {tokens: Token[], error: JinjaError | null} {
 		if (text) {
 			this.text = text
+			this.pos = new Position(-1, 0, -1, text, this.fileName)
+			this.advance()
 		}
-		
+
 		let tokens: Token[] = []
 		let inBlock = false
 		let asCode = false
