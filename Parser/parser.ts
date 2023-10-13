@@ -76,7 +76,7 @@ class Parser {
 
 		if (this.currentToken.type === TokenType.TT_EOF) {
 			return res.success(
-				new ListNode(statements, posStart!, this.currentToken.posEnd!.copy())
+				new ListNode(statements, posStart!, this.currentToken.posEnd?.copy() ?? this.currentToken.posStart!.copy()) 
 			)
 		}
 
@@ -122,12 +122,12 @@ class Parser {
 
 		if (statements.length > 0) {
 			return res.success(
-				new ListNode(statements, posStart!, this.currentToken.posEnd!.copy())
+				new ListNode(statements, posStart!, this.currentToken.posEnd?.copy() ?? this.currentToken.posStart!.copy()) 
 			)
 		}
 
 		return res.success(
-			new ListNode(statements, posStart!, this.currentToken.posEnd!.copy())
+			new ListNode(statements, posStart!, this.currentToken.posEnd?.copy() ?? this.currentToken.posStart!.copy()) 
 		)
 
 	}
