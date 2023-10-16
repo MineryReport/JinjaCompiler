@@ -313,8 +313,6 @@ class Parser {
 				let tmp = this.tokens[this.tokenIndex + 1]
 
 				if (tmp.matches(TokenType.TT_KEYWORD, "endfor")) {
-
-					console.log({statements});
 					return res.success(statements)
 				}
 
